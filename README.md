@@ -33,7 +33,7 @@ Run `npm run build`. Start the compiled API with `npm run start --prefix backend
 
 ## Deploy to Vercel
 
-The repository includes a root `vercel.json` for Vercel Services. It deploys `backend/` as Express and `frontend/` as Vite on one project and routes `/api/*` to the backend. The browser uses the same-origin `/api` path in production; Vite proxies that path to the local API during development.
+The repository includes a root `vercel.json` for Vercel Services. It deploys `backend/` as a Node container and `frontend/` as Vite on one project and routes `/api/*` to the backend. The browser uses the same-origin `/api` path in production; Vite proxies that path to the local API during development.
 
 1. Create a production MySQL database with a provider that accepts connections from Vercel. The local Docker database is only for development and cannot be used by the hosted app.
 2. In Vercel, import `MK543-dev/Assessment-for-SDE-intern`. Keep the root directory as `./`, project name `StockFlow`, and choose the **Services** preset. The repo's `vercel.json` defines the frontend and backend services and their routes.

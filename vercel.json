@@ -3,8 +3,8 @@
   "services": {
     "backend": {
       "root": "backend",
-      "framework": "express",
-      "buildCommand": "npm run build"
+      "runtime": "container",
+      "entrypoint": "Dockerfile.vercel"
     },
     "frontend": {
       "root": "frontend",
