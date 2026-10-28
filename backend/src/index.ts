@@ -1,5 +1,3 @@
-import dotenv from 'dotenv';
-import path from 'path';
 import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -9,7 +7,6 @@ import { Prisma, PrismaClient } from '@prisma/client';
 import { z } from 'zod';
 
 const app = express();
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 const prisma = new PrismaClient();
 const port = Number(process.env.PORT) || 4000;
 const jwtSecret = process.env.JWT_SECRET;
