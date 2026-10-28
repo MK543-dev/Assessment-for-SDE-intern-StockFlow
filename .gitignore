@@ -1,0 +1,13 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+backend/node_modules/
+frontend/node_modules/
+backend/dist/
+frontend/dist/
+*.log
+*.tsbuildinfo
+.DS_Store
