@@ -18,7 +18,7 @@ A simple, multi-tenant inventory app for small businesses. Owners can create an 
 
 ## Run locally
 
-1. Copy `.env.example` to `.env` in the repository root. Set `JWT_SECRET` to a long random secret. The example database URL matches the included local Docker database.
+1. Copy `.env.example` to `.env` in the repository root. Set `JWT_SECRET` to a long random secret. The example database URL matches the included local Docker database, exposed on port 3307 to avoid conflicts with a locally installed MySQL server.
 2. Start MySQL: `docker compose up -d mysql`
 3. Install dependencies from the repository root: `npm install`, `npm install --prefix backend`, and `npm install --prefix frontend`.
 4. Generate the Prisma client and create/update the database schema: `npm run db:generate` and `npm run db:push`.
