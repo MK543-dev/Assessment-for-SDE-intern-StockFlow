@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api';
+const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:4000/api' : '/api');
 export const tokenKey = 'stockflow_token';
 
 export async function api<T>(path: string, options: RequestInit = {}): Promise<T> {

@@ -31,6 +31,18 @@ To stop MySQL, run `docker compose down`. To also remove the local database volu
 
 Run `npm run build`. Start the compiled API with `npm run start --prefix backend` and serve the built `frontend/dist` directory from a static host. Set `DATABASE_URL`, `JWT_SECRET`, `PORT`, and `CLIENT_URL` in the backend environment. Set `VITE_API_URL` at frontend build time if the API is hosted at a different origin (for example, `https://api.example.com/api`).
 
+## Deploy to Vercel
+
+The repository includes a root `vercel.json` for Vercel Services. It deploys `backend/` as Express and `frontend/` as Vite on one project and routes `/api/*` to the backend. The browser uses the same-origin `/api` path in production; Vite proxies that path to the local API during development.
+
+1. Create a production MySQL database with a provider that accepts connections from Vercel. The local Docker database is only for development and cannot be used by the hosted app.
+2. In Vercel, import `MK543-dev/Assessment-for-SDE-intern`. Keep the root directory as `./`, project name `StockFlow`, and choose the **Services** preset. The repo's `vercel.json` defines the frontend and backend services and their routes.
+3. In the Vercel project environment variables, add `DATABASE_URL` with the provider's MySQL connection string and `JWT_SECRET` with a new long random secret. Set them for Production (and Preview if you want preview deployments to work; ideally use a separate preview database). The API and browser frontend share one Vercel domain, so no `VITE_API_URL` or service binding is needed.
+4. Before the first deployment can serve requests, apply the Prisma schema to the hosted MySQL database. One option is to temporarily put the production `DATABASE_URL` in the local root `.env`, then run `npm run db:push` from the repo root. Keep the URL private and restore your local development URL afterward. Alternatively, use `npx vercel link`, add the production environment variables in Vercel, and run the Prisma command with those production variables in a secure local environment.
+5. Redeploy from Vercel after setting the environment variables and initializing the schema. Test signup, login, creating a product, and `/api/health` on the deployed domain.
+
+Vercel Services documentation: https://vercel.com/docs/services
+
 ## API
 
 All routes are under `/api`. Authenticated routes require `Authorization: Bearer <token>`.
